@@ -16,7 +16,7 @@ executeBitbucket
 			repository: self destination;
 			version: info name;
 			push.
-		message := 'v. ', (info versionNumber asString padLeftTo: 2 with: $0).
+		message := info name, ' ', (info versionNumber asString padLeftTo: 2 with: $0).
 		info message = 'empty log message' ifFalse: [ 
 			message := message, ':'.
 			message := info message lines size > 1
@@ -25,6 +25,6 @@ executeBitbucket
 			message := message, info message ].
 			(message includes: $') ifTrue: [ 
 				message := message copyReplaceAll: '''' with: '' ].	
-			NBMacShell run: 'cd /Users/sean/Dynabook/Working\ Images/ProjectProject/git/;git add -A'.
-			NBMacShell run: 'cd /Users/sean/Dynabook/Working\ Images/ProjectProject/git/;git commit -m ''', message, ''''.
+			NBMacShell run: 'cd "', FileLocator imageDirectory fullName, '/git/";git add -A'.
+			NBMacShell run: 'cd "', FileLocator imageDirectory fullName, '/git/";git commit -m ''', message, ''''.
 			 ].
