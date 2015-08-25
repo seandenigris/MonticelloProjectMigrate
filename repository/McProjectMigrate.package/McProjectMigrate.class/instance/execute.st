@@ -15,7 +15,10 @@ execute
 	self versionFilenames 
 		reject: [ :file | destinationFiles includes: file ]
 		thenDo: [ :file | goferDestination version: file ].
+	
+	UIManager default inform: 'Why are the versions being uploaded in seemingly random order? https://github.com/seandenigris/SeansPlayground/issues/37'
+	Halt now.
 
 	goferDestination push. "send everything to destination"
 
-	self assert: self destination allVersionNames sorted equals: self versionFilenames sorted. "check that we have exactly the same versions at source and destination. This may not be meaningful when moving to a non-empty destination"
+	self assert: self destination allVersionNames sorted = self versionFilenames sorted. "check that we have exactly the same versions at source and destination. This may not be meaningful when moving to a non-empty destination"
