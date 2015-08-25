@@ -1,5 +1,5 @@
 accessing
 versionFilenames
 	^ versionFilenames
-		ifNil: [ self source allVersionNames ]
+		ifNil: [ versionFilenames := self source allVersionNames ]
 		ifNotNil: [ :names | names value ]

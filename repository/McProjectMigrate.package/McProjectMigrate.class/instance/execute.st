@@ -8,14 +8,14 @@ execute
 	(goferSource allResolved select: [ :resolved | self versionFilenames anySatisfy: [ :each |
 	    resolved name = each ] ]) do: [ :each | goferSource package: each packageName ].
 
-	goferSource fetch. "downloads all mcz on your computer"
+	goferSource fetch. "download all the source's mczs locally"
 
-	destinationFiles := self destination allVersionNames. "checks what self versionFilenames are already at destination"
-	self versionFilenames reject: [ :file | destinationFiles includes: file ] thenDo: [ :file |
-	    goferDestination version: file ]. "selects only the mcz that are not yet at destination"
+	"skip versions that are already at the destination"
+	destinationFiles := self destination allVersionNames.
+	self versionFilenames 
+		reject: [ :file | destinationFiles includes: file ]
+		thenDo: [ :file | goferDestination version: file ].
 
-	goferDestination push. "sends everything to SmalltalkHub"
+	goferDestination push. "send everything to destination"
 
-	Halt now.
-	self assert: self destination allVersionNames sorted = self versionFilenames sorted.
-	"checks we have exactly the same self versionFilenames at source and destination"
+	self assert: self destination allVersionNames sorted equals: self versionFilenames sorted. "check that we have exactly the same versions at source and destination. This may not be meaningful when moving to a non-empty destination"
