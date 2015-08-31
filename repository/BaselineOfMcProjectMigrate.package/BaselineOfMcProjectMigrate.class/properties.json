@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfMcProjectMigrate",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfMcProjectMigrate",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
