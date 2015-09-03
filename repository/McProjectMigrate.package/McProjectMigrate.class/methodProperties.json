@@ -1,12 +1,12 @@
 {
 	"class" : {
-		"exampleMigrateToFileTree" : "SeanDeNigris 9/2/2015 20:22",
+		"exampleMigrateToFileTree" : "SeanDeNigris 9/2/2015 22:55",
 		"migrateFrom:to:" : "SeanDeNigris 5/11/2015 08:35" },
 	"instance" : {
 		"destination" : "SeanDeNigris 4/1/2015 11:39",
 		"destination:" : "SeanDeNigris 4/1/2015 11:39",
 		"execute" : "SeanDeNigris 5/11/2015 16:05",
-		"executeBitbucket" : "SeanDeNigris 8/24/2015 23:27",
+		"executeGit" : "SeanDeNigris 9/2/2015 22:54",
 		"source" : "SeanDeNigris 4/1/2015 11:39",
 		"source:" : "SeanDeNigris 4/1/2015 11:39",
 		"versionFilenames" : "SeanDeNigris 5/7/2015 13:14",

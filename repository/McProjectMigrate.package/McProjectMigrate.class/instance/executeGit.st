@@ -1,5 +1,5 @@
 command
-executeBitbucket
+executeGit
 
 	| goferSource sourceVersionsByDate versionsToCopy |
 	goferSource := Gofer new repository: self source.

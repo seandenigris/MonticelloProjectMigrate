@@ -9,4 +9,4 @@ exampleMigrateToFileTree
 		source: source;
 		versionFilenames: files;
 		destination: destination.
-	m executeBitbucket
+	m executeGit
