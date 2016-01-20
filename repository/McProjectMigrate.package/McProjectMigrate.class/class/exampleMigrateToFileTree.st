@@ -6,6 +6,7 @@ exampleMigrateToFileTree
 
 	"Destination Repository"
 	"Option 1: Create instance on local Git clone"
+	"NB: Make sure local git clone is setup before proceeding!"
 	destinationParent := FileLocator home.
 	destination := MCFileTreeRepository new
 		directory: (destinationParent / projectName / 'repository') ensureCreateDirectory;
