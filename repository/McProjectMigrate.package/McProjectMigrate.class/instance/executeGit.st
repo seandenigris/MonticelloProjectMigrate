@@ -1,13 +1,17 @@
 command
 executeGit
 
-	| goferSource sourceVersionsByDate versionsToCopy |
+	| goferSource sourceVersionsByDate versionsToCopy  requestedVersions |
 	goferSource := Gofer new repository: self source.
-	sourceVersionsByDate := source allVersionInfos sort: [ :a :b | a timeStamp < b timeStamp ].
-	versionsToCopy := sourceVersionsByDate select: [ :resolved | 
+	self versionFilenames do: [ :e | goferSource version: e ].
+	requestedVersions := goferSource resolved collect: [ :e | e version info ].
+	sourceVersionsByDate := requestedVersions sort: [ :a :b | a timeStamp < b timeStamp ].
+	"sourceVersionsByDate := sourceVersionsByDate allButFirst: 332."
+	"sourceVersionsByDate := source allVersionInfos sort: [ :a :b | a timeStamp < b timeStamp ]."
+	versionsToCopy := sourceVersionsByDate" select: [ :resolved | 
 		self versionFilenames anySatisfy: [ :each |
 	    resolved name = each ] ].
-	versionsToCopy do: [ :each | goferSource version: each name ].
+	versionsToCopy do: [ :each | goferSource version: each name ]".
 
 	goferSource fetch. "download all the source's mczs locally"
 
@@ -21,11 +25,12 @@ executeGit
 			info message = 'empty log message' ifFalse: [ 
 				message := message, ':'.
 				message := info message lines size > 1
-					ifTrue: [ message, Character cr asString ]
+					ifTrue: [ message, Character lf asString ]
 					ifFalse: [ message, Character space asString ].
-				message := message, info message ].
+				message := message, info message withUnixLineEndings ].
 				(message includes: $') ifTrue: [ 
 					message := message copyReplaceAll: '''' with: '' ].	
+				Halt once.
 				NBMacShell run: 'cd "', destination directory parent fullName, '";git add -A'.
 				NBMacShell run: 'cd "', destination directory parent fullName, '";git commit -m ''', message, '''' ].
 			job increment ] asJob
