@@ -2,6 +2,7 @@ command
 executeGit
 
 	| goferSource sourceVersionsByDate versionsToCopy  requestedVersions |
+	self assert: (self destination directory parent / '.git') exists description: 'A local git repo must already exist at the destination!!!'.
 	goferSource := Gofer new repository: self source.
 	self versionFilenames do: [ :e | goferSource version: e ].
 	requestedVersions := goferSource resolved collect: [ :e | e version info ].
@@ -30,9 +31,8 @@ executeGit
 				message := message, info message withUnixLineEndings ].
 				(message includes: $') ifTrue: [ 
 					message := message copyReplaceAll: '''' with: '' ].	
-				Halt once.
-				NBMacShell run: 'cd "', destination directory parent fullName, '";git add -A'.
-				NBMacShell run: 'cd "', destination directory parent fullName, '";git commit -m ''', message, '''' ].
+				Smalltalk tools shell waitForCommand: 'cd "', destination directory parent fullName, '";git add -A'.
+				Smalltalk tools shell waitForCommand: 'cd "', destination directory parent fullName, '";git commit -m ''', message, '''' ].
 			job increment ] asJob
 		min: 0;
 		max: versionsToCopy size;

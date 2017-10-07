@@ -1,16 +1,15 @@
 {
-	"category" : "McProjectMigrate",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "SeanDeNigris 9/7/2015 14:16",
+	"super" : "Object",
+	"category" : "McProjectMigrate",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"source",
 		"destination",
-		"versionFilenames" ],
+		"versionFilenames"
+	],
 	"name" : "McProjectMigrate",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}
